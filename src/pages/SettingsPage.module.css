@@ -1,0 +1,62 @@
+/* One column on small screens.
+   Wider screens: "You" + "Look & feel" stacked on the left,
+   "Your data" on the right — both columns end at the same height. */
+.stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+}
+@media (min-width: 1000px) {
+    .stack {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+            "you  data"
+            "look data";
+        grid-template-rows: auto 1fr;
+    }
+    .you { grid-area: you; }
+    .look { grid-area: look; }
+    .data { grid-area: data; }
+}
+.inline {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+.inline label { flex: 1; }
+.note {
+    margin: 8px 0 4px;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+.rows {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 2px dashed color-mix(in srgb, var(--ink-soft) 50%, transparent);
+}
+.row:first-child { border-top: none; }
+.row > span {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.row small {
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+.select { width: auto; }
+.danger { background: #ff9d92; }
+
+@media (max-width: 480px) {
+    .row { flex-wrap: wrap; }
+    .inline { flex-direction: column; align-items: stretch; }
+}

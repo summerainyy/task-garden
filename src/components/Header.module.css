@@ -1,0 +1,83 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.sun {
+    width: 92px;
+    height: 92px;
+    flex: none;
+    overflow: visible;
+}
+.rays {
+    fill: var(--butter);
+    stroke: var(--line);
+    stroke-width: 2.5;
+    transform-origin: 50px 50px;
+    animation: spin 24s linear infinite;
+}
+.sunFace {
+    fill: var(--butter);
+    stroke: var(--line);
+    stroke-width: 3;
+}
+.moonFace {
+    fill: #ffe9a8;
+    stroke: var(--line);
+    stroke-width: 3;
+    transform-origin: 50px 50px;
+    animation: sway 6s ease-in-out infinite;
+}
+.eye { fill: #3b3557; }
+.cheek { fill: #ff9bb0; opacity: 0.8; }
+.smile {
+    fill: none;
+    stroke: #3b3557;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+.zzz {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    fill: var(--ink);
+    animation: drift 3s ease-in-out infinite;
+}
+
+.titles { flex: 1; min-width: 0; }
+.date {
+    margin: 0;
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+}
+.title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink);
+    text-shadow: 3px 3px 0 var(--coral);
+}
+.subtitle {
+    margin: 6px 0 0;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes drift {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-4px); }
+}
+
+@media (max-width: 520px) {
+    .sun { width: 64px; height: 64px; }
+    .header { align-items: flex-start; }
+}

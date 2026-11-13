@@ -1,0 +1,17 @@
+# Render Blueprint: deploys Task Garden as a free static site.
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: task-garden
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+    routes:
+      # React Router handles pages like /tasks and /lists in the browser,
+      # so every path must serve index.html (otherwise refreshing gives a 404).
+      - type: rewrite
+        source: /*
+        destination: /index.html

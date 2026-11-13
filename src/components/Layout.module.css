@@ -1,0 +1,263 @@
+.shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------- sidebar menu ---------- */
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 16px;
+    overflow-y: auto;
+    background: var(--paper);
+    border-right: 2.5px solid var(--line);
+}
+
+.sideTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 0.95;
+}
+.brandSun {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 2.5px solid var(--line);
+    border-radius: 50%;
+    background: var(--butter);
+    box-shadow: var(--pop-sm);
+    font-size: 1.6rem;
+    transition: transform 0.3s;
+}
+.brand:hover .brandSun { transform: rotate(25deg) scale(1.05); }
+
+.closeBtn {
+    display: none;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper-2);
+}
+
+.newBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px;
+    margin: 4px 0 10px;
+    border: 2.5px solid var(--line);
+    border-radius: 16px;
+    background: var(--coral);
+    color: #3b3557;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+    box-shadow: var(--pop-sm);
+    transition: transform 0.12s, box-shadow 0.12s;
+}
+.newBtn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--line); }
+.newBtn:active { transform: translate(2px, 2px); box-shadow: none; }
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    color: var(--ink);
+    font-weight: 800;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+}
+.navItem:hover {
+    background: var(--paper-2);
+    transform: translateX(3px) rotate(-0.5deg);
+}
+.active,
+.active:hover {
+    background: var(--butter);
+    border-color: var(--line);
+    color: #3b3557;
+    box-shadow: var(--pop-sm);
+}
+.navIcon {
+    width: 24px;
+    text-align: center;
+}
+.navLabel {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.count {
+    min-width: 24px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.72rem;
+    text-align: center;
+}
+.active .count { background: #3b3557; color: #fffaf0; }
+.listItem.active { background: var(--list); }
+.addList { color: var(--ink-soft); font-weight: 700; }
+
+.sectionLabel {
+    margin: 14px 12px 2px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+
+.sideBottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding: 12px;
+    border: 2px dashed var(--ink-soft);
+    border-radius: 16px;
+}
+.snail {
+    font-size: 1.6rem;
+    animation: crawl 6s ease-in-out infinite;
+}
+.slow {
+    flex: 1;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+}
+
+/* laptop-height screens: tighter menu so it fits without scrolling */
+@media (min-width: 901px) and (max-height: 920px) {
+    .sidebar { gap: 4px; padding: 14px 12px; }
+    .sideTop { margin-bottom: 2px; }
+    .brand { font-size: 1.25rem; }
+    .brandSun { width: 40px; height: 40px; font-size: 1.3rem; }
+    .newBtn { padding: 8px; margin: 2px 0 6px; font-size: 1rem; }
+    .nav { gap: 2px; }
+    .navItem { padding: 6px 10px; }
+    .sectionLabel { margin: 8px 10px 2px; }
+    .sideBottom { padding: 6px 10px; }
+    .slow { display: none; }
+    .sideBottom { justify-content: space-between; }
+}
+
+/* ---------- page area ---------- */
+
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 32px 32px 56px;
+}
+
+.topbar,
+.scrim { display: none; }
+
+/* ---------- phones & tablets: top bar + slide-out drawer ---------- */
+
+@media (max-width: 900px) {
+    .shell { flex-direction: column; }
+
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 16px;
+        background: var(--paper);
+        border-bottom: 2.5px solid var(--line);
+    }
+    .topbar .brand { font-size: 1.15rem; }
+    .topbar .brandSun { width: 38px; height: 38px; font-size: 1.25rem; }
+
+    .burger {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        padding: 0 10px;
+        border: 2.5px solid var(--line);
+        border-radius: 12px;
+        background: var(--paper-2);
+        box-shadow: var(--pop-sm);
+    }
+    .burger span {
+        height: 3px;
+        border-radius: 3px;
+        background: var(--ink);
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        z-index: 50;
+        width: min(290px, 85vw);
+        border-radius: 0 24px 24px 0;
+        box-shadow: 6px 0 0 var(--line);
+        transform: translateX(-110%);
+        transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .sidebarOpen { transform: none; }
+    .closeBtn { display: grid; place-items: center; }
+
+    .scrim {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(30, 24, 60, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+    .scrimOpen { opacity: 1; pointer-events: auto; }
+
+    .sideBottom :global(button[role="switch"]) { display: none; }
+    .main { padding: 22px 16px 48px; }
+}
+
+@keyframes crawl {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+}
