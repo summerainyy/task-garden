@@ -1,0 +1,36 @@
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100vw - 32px);
+    padding: 8px 8px 8px 18px;
+    border: 2.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    box-shadow: var(--pop);
+    transform: translateX(-50%);
+    animation: pop-in 0.35s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+.undo {
+    padding: 4px 12px;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    background: var(--butter);
+    color: #3b3557;
+    font-weight: 800;
+}
+.close {
+    border: none;
+    background: none;
+    opacity: 0.7;
+}
+@keyframes pop-in {
+    from { opacity: 0; transform: translate(-50%, 20px) scale(0.9); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}

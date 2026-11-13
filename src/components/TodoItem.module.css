@@ -1,0 +1,180 @@
+.item {
+    position: relative;
+    border: 2.5px solid var(--line);
+    border-radius: 18px;
+    background: var(--paper);
+    box-shadow: var(--pop);
+    animation: rise 0.3s ease;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+}
+/* little coloured seed-packet tab for the list */
+.item::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: -2.5px;
+    width: 7px;
+    border-radius: 0 6px 6px 0;
+    background: var(--list);
+}
+.item:hover {
+    transform: translate(-1px, -2px) rotate(-0.3deg);
+    box-shadow: 5px 6px 0 var(--line);
+}
+
+.done { background: var(--paper-2); }
+.done .text {
+    color: var(--ink-soft);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--coral);
+}
+.overdue { background: color-mix(in srgb, var(--coral) 14%, var(--paper)); }
+.dragging { opacity: 0.4; }
+.dropTarget { box-shadow: 0 -5px 0 var(--coral), var(--pop); }
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 10px 12px 16px;
+}
+
+.grip {
+    color: var(--ink-soft);
+    cursor: grab;
+    user-select: none;
+    opacity: 0.5;
+}
+.item:hover .grip { opacity: 1; }
+
+/* the seed that becomes a flower */
+.check {
+    width: 34px;
+    height: 34px;
+    flex: none;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border: 2.5px solid var(--line);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff 0 18%, transparent 19%), var(--paper-2);
+    font-size: 1.15rem;
+    transition: transform 0.15s, background 0.2s;
+}
+.check:hover { transform: scale(1.1) rotate(-8deg); background: var(--paper-2); }
+.done .check { background: var(--list); }
+.bloom { position: relative; }
+.bloom span { display: inline-block; animation: bloom 0.6s ease-out; }
+.bloom::before,
+.bloom::after {
+    content: "✿";
+    position: absolute;
+    color: var(--coral);
+    font-size: 0.9rem;
+    pointer-events: none;
+    animation: petal 0.8s ease-out forwards;
+}
+.bloom::before { --dx: -20px; --dy: -18px; }
+.bloom::after { --dx: 20px; --dy: -16px; color: var(--butter); content: "✦"; }
+
+.body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.text {
+    font-weight: 800;
+    font-size: 1.05rem;
+    word-break: break-word;
+    cursor: text;
+}
+.edit {
+    padding: 2px 0;
+    border: none;
+    border-bottom: 2.5px solid var(--coral);
+    background: transparent;
+    outline: none;
+    font-weight: 800;
+    font-size: 1.05rem;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.listChip { background: var(--list); color: #3b3557; }
+.due_today { background: var(--butter); color: #3b3557; }
+.due_overdue { background: var(--coral); color: #3b3557; }
+
+.actions {
+    display: flex;
+    gap: 2px;
+}
+.caret { transition: transform 0.2s; }
+.caretOpen { transform: rotate(180deg); }
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0 14px 14px;
+    padding-top: 12px;
+    border-top: 2px dashed var(--ink-soft);
+    animation: rise 0.25s ease;
+}
+.fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.steps li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+.steps li:hover { background: var(--paper-2); }
+.steps label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.steps input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--grass-2);
+}
+.stepDone span {
+    text-decoration: line-through;
+    color: var(--ink-soft);
+}
+.addStep {
+    display: flex;
+    gap: 6px;
+}
+
+@keyframes petal {
+    from { opacity: 1; transform: translate(0, 0) scale(0.5); }
+    to { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(90deg); }
+}
+
+@media (max-width: 520px) {
+    .row { flex-wrap: wrap; }
+    .body { flex-basis: calc(100% - 90px); }
+    .actions { margin-left: auto; }
+    .details { margin: 0 10px 12px; }
+}

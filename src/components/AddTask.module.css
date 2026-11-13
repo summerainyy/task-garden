@@ -1,0 +1,80 @@
+.card {
+    container: addtask / inline-size;
+    margin-bottom: 18px;
+    padding: 12px 12px 10px;
+    border: 2.5px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    box-shadow: var(--pop);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.seed {
+    width: 40px;
+    height: 40px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border: 2px dashed var(--line);
+    border-radius: 50%;
+    background: var(--paper-2);
+    font-size: 1.2rem;
+}
+
+.input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 4px;
+    border: none;
+    border-bottom: 2.5px dotted var(--ink-soft);
+    background: transparent;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.input:focus { border-bottom-color: var(--coral); }
+.input::placeholder { color: var(--ink-soft); font-weight: 600; }
+
+.hint {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 4px 0 52px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+.hint code {
+    padding: 0 5px;
+    border-radius: 6px;
+    background: var(--paper-2);
+    font-family: inherit;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 2px dashed var(--ink-soft);
+    animation: rise 0.25s ease;
+}
+
+@container addtask (max-width: 560px) {
+    .row { flex-wrap: wrap; }
+    .input { flex-basis: calc(100% - 48px); }
+    .row > button { flex: 1; }
+    .hint { margin-left: 4px; }
+}
+@container addtask (max-width: 340px) {
+    .optLabel { display: none; }
+}
